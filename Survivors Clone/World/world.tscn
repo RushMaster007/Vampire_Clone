@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfd0cplgx0r6r"]
+
+[ext_resource type="Texture2D" uid="uid://b6jl8huy4h3mb" path="res://Textures/dirt_full_new.png" id="1_ynxyy"]
+[ext_resource type="PackedScene" uid="uid://di8a2jc18xmfa" path="res://Player/player.tscn" id="2_mrv36"]
+[ext_resource type="PackedScene" uid="uid://iw73hslc31cp" path="res://Objects/experience_gem.tscn" id="3_nrgof"]
+[ext_resource type="PackedScene" uid="uid://bd8s13jkkrdw7" path="res://Enemy/enemy.tscn" id="3_t8rux"]
+
+[node name="World" type="Node2D"]
+position = Vector2(3, 3)
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(61.4998, 15.9999)
+scale = Vector2(0.9315, 0.984)
+texture = ExtResource("1_ynxyy")
+region_enabled = true
+region_rect = Rect2(-2000, -2000, 2000, 2000)
+
+[node name="Player" parent="." instance=ExtResource("2_mrv36")]
+
+[node name="enemy_kobold_weak2" parent="." instance=ExtResource("3_t8rux")]
+position = Vector2(105, -80)
+collision_layer = 5
+collision_mask = 5
+hp = -1
+
+[node name="Loot" type="Node2D" parent="." groups=["loot"]]
+
+[node name="ExperienceGem3" parent="Loot" instance=ExtResource("3_nrgof")]
+position = Vector2(213, 95)
+
+[node name="ExperienceGem4" parent="Loot" instance=ExtResource("3_nrgof")]
+position = Vector2(190, 37)
+experience = 10
+
+[node name="ExperienceGem5" parent="Loot" instance=ExtResource("3_nrgof")]
+position = Vector2(191, -5)
+experience = 50

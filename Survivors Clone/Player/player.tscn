@@ -1,0 +1,112 @@
+[gd_scene load_steps=13 format=3 uid="uid://di8a2jc18xmfa"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_2ebe6"]
+[ext_resource type="Texture2D" uid="uid://csyhuhvnin2tq" path="res://Textures/Player/KittyMonk.png" id="2_2we34"]
+[ext_resource type="Texture2D" uid="uid://byej35da5xs7j" path="res://Textures/GUI/exp_background.png" id="3_ixntq"]
+[ext_resource type="Texture2D" uid="uid://7qsd8niunxw1" path="res://Textures/GUI/exp_progress.png" id="4_dg581"]
+[ext_resource type="FontFile" uid="uid://be817838ll468" path="res://Font/tenderness.otf" id="5_d7ms7"]
+[ext_resource type="Texture2D" uid="uid://coa0jvofviml5" path="res://Textures/GUI/healthbar.png" id="6_r6ov0"]
+[ext_resource type="Texture2D" uid="uid://bsjclfqbd1gsn" path="res://Textures/GUI/health.png" id="7_vexv7"]
+[ext_resource type="PackedScene" uid="uid://bkjktb3icpw18" path="res://Utility/hurtbox.tscn" id="8_nu2ww"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_txibm"]
+radius = 5.0
+height = 20.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v53bu"]
+size = Vector2(19, 27)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gh8b4"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a3aia"]
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+motion_mode = 1
+script = ExtResource("1_2ebe6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_2we34")
+hframes = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 2)
+shape = SubResource("CapsuleShape2D_txibm")
+
+[node name="Hurtbox" parent="." instance=ExtResource("8_nu2ww")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(2.5, 0.5)
+shape = SubResource("RectangleShape2D_v53bu")
+
+[node name="GrabArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
+position = Vector2(1, 7)
+shape = SubResource("CircleShape2D_gh8b4")
+
+[node name="CollectArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
+shape = SubResource("CircleShape2D_a3aia")
+
+[node name="GUILayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="Control" parent="GUILayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 5.0
+offset_right = 640.0
+offset_bottom = 30.0
+value = 100.0
+texture_over = ExtResource("3_ixntq")
+texture_progress = ExtResource("4_dg581")
+texture_progress_offset = Vector2(14, 0)
+
+[node name="lbl_level" type="Label" parent="GUILayer/GUI/ExperienceBar"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 540.0
+offset_top = 1.0
+offset_right = 640.0
+offset_bottom = 26.0
+theme_override_fonts/font = ExtResource("5_d7ms7")
+theme_override_font_sizes/font_size = 16
+text = "Level: 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthBar" type="TextureProgressBar" parent="GUILayer/GUI"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.588235)
+layout_mode = 0
+offset_left = 297.0
+offset_top = 201.0
+offset_right = 343.0
+offset_bottom = 212.0
+value = 100.0
+texture_over = ExtResource("6_r6ov0")
+texture_progress = ExtResource("7_vexv7")
+texture_progress_offset = Vector2(13, 3)
+
+[connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
+[connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
+[connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
+
+[editable path="Hurtbox"]
