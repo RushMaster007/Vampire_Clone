@@ -15,7 +15,7 @@ var angle = Vector2.ZERO
 
 func _ready():
 	# set angle to a vector2 value 
-	# by comparing the glob pos of the icespear to the target
+	# by comparing the glob pos of the knife to the target
 	angle = global_position.direction_to(target)
 	rotation = angle.angle() + deg_to_rad(135)
 	match level:
@@ -39,7 +39,7 @@ func _physics_process(delta):
 func enemy_hit(charge = 1):
 	hp -= charge
 	if hp <= 0:
-		queue_free() # delete ice spear
+		queue_free() # delete knife
 
 # time to live if it misses and enemy
 func _on_ttl_timeout():

@@ -11,7 +11,6 @@ func tempdisable():
 	collision.call_deferred("set","disabled",true)
 	disableTimer.start()
 
-
 func _on_disable_hit_box_timer_timeout():
 	#enable hitbox collision
 	collision.call_deferred("set","disabled",false)	
