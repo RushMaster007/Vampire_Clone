@@ -8,10 +8,10 @@ position = Vector2(0, -1)
 motion_mode = 1
 script = ExtResource("1_tswww")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 texture_filter = 3
 scale = Vector2(1.45313, 1.39063)
 texture = ExtResource("1_gj13x")
 hframes = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]

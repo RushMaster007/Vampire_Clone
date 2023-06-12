@@ -20,8 +20,5 @@ enemy_spawn_delay = 3
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("2_2uven")]
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, 1)
-
 [node name="EnemySpawner" parent="." instance=ExtResource("1_l61e3")]
 spawns = Array[ExtResource("2_ixyhb")]([SubResource("Resource_krmha")])
