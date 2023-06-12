@@ -1,0 +1,6 @@
+res://Enemy/enemy_controller.tscn
+res://Enemy/enemy_spawner.tscn
+res://Player/player.tscn
+res://world.tscn
+res://Enemy/EnemySpawner.gd
+res://Enemy/enemy_controller.gd

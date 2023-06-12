@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://dv22tv16vi1xj"]
+
+[ext_resource type="PackedScene" uid="uid://b1aow01q8fcyv" path="res://Enemy/enemy_spawner.tscn" id="1_l61e3"]
+[ext_resource type="PackedScene" uid="uid://cdqy6jnq361kn" path="res://Player/player.tscn" id="2_2uven"]
+[ext_resource type="Texture2D" uid="uid://dw13inxc36ava" path="res://Textures/Enemy/kolbold_weak.png" id="2_4xd2p"]
+[ext_resource type="Script" path="res://SpawnInfo.gd" id="2_ixyhb"]
+
+[sub_resource type="Resource" id="Resource_krmha"]
+script = ExtResource("2_ixyhb")
+movement_speed = 20.0
+Sprite = ExtResource("2_4xd2p")
+Enemy_Type = 0
+damage = 5.0
+time_start = 0
+time_end = 200
+enemy_num = 5
+enemy_spawn_delay = 3
+
+[node name="World" type="Node2D"]
+
+[node name="Player" parent="." groups=["player"] instance=ExtResource("2_2uven")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, 1)
+
+[node name="EnemySpawner" parent="." instance=ExtResource("1_l61e3")]
+spawns = Array[ExtResource("2_ixyhb")]([SubResource("Resource_krmha")])
