@@ -18,7 +18,6 @@ script = ExtResource("1_7b2gk")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-3.40972e-07, -4.15478e-07)
 rotation = -0.785398
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_alpql")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
